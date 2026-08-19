@@ -8,21 +8,35 @@
   --font-telugu: "Noto Serif Telugu", serif;
   --font-telugu-round: "Baloo Tammudu 2", cursive;
   --font-script: "Cormorant Garamond", serif;
-  --color-marigold: oklch(0.79 0.15 84);
-  --color-marigold-deep: oklch(0.68 0.16 68);
-  --color-cream: oklch(0.975 0.02 92);
-  --color-ink: oklch(0.32 0.03 60);
-  --color-leaf: oklch(0.52 0.08 150);
-  --color-rose: oklch(0.72 0.12 20);
+  --color-marigold: oklch(0.82 0.19 82);
+  --color-marigold-deep: oklch(0.66 0.2 60);
+  --color-cream: oklch(0.98 0.025 90);
+  --color-ink: oklch(0.28 0.04 55);
+  --color-leaf: oklch(0.48 0.1 150);
+  --color-rose: oklch(0.68 0.18 18);
+  --color-ruby: oklch(0.55 0.22 20);
+  --color-gold: oklch(0.78 0.17 78);
 }
 
 @utility card-shadow {
-  box-shadow: 0 18px 45px -20px color-mix(in oklab, var(--color-marigold-deep) 55%, transparent);
+  box-shadow:
+    0 22px 55px -22px color-mix(in oklab, var(--color-marigold-deep) 65%, transparent),
+    0 0 0 1px color-mix(in oklab, var(--color-gold) 35%, transparent);
+}
+
+@utility text-glow {
+  text-shadow: 0 2px 18px color-mix(in oklab, var(--color-marigold) 55%, transparent);
+}
+
+@utility ring-glow {
+  box-shadow:
+    0 0 0 3px color-mix(in oklab, var(--color-cream) 80%, transparent),
+    0 0 40px -8px color-mix(in oklab, var(--color-marigold) 80%, transparent);
 }
 
 @keyframes float-soft {
   0%, 100% { transform: translateY(0); }
-  50% { transform: translateY(-10px); }
+  50% { transform: translateY(-12px); }
 }
 @keyframes petal-fall {
   0% { transform: translateY(-10vh) rotate(0deg); opacity: 0; }
@@ -34,14 +48,30 @@
   to { opacity: 1; transform: translateY(0); }
 }
 @keyframes glow-pulse {
-  0%, 100% { opacity: 0.35; transform: scale(1); }
-  50% { opacity: 0.7; transform: scale(1.08); }
+  0%, 100% { opacity: 0.4; transform: scale(1); }
+  50% { opacity: 0.85; transform: scale(1.12); }
+}
+@keyframes shimmer {
+  0% { background-position: -200% center; }
+  100% { background-position: 200% center; }
 }
 
-@utility float-soft { animation: float-soft 5s ease-in-out infinite; }
+@utility float-soft { animation: float-soft 4.5s ease-in-out infinite; }
 @utility rise-in { animation: rise-in 0.9s cubic-bezier(0.22, 1, 0.36, 1) both; }
-@utility glow-pulse { animation: glow-pulse 3s ease-in-out infinite; }
+@utility glow-pulse { animation: glow-pulse 2.8s ease-in-out infinite; }
 @utility petal { animation: petal-fall linear infinite; }
+@utility shimmer {
+  background: linear-gradient(
+    90deg,
+    transparent 0%,
+    color-mix(in oklab, var(--color-cream) 60%, transparent) 25%,
+    transparent 50%,
+    color-mix(in oklab, var(--color-cream) 60%, transparent) 75%,
+    transparent 100%
+  );
+  background-size: 200% 100%;
+  animation: shimmer 3s linear infinite;
+}
 
 /*
  * Design system definition.

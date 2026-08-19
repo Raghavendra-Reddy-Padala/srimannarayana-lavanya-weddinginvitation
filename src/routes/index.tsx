@@ -1,5 +1,5 @@
 import { createFileRoute } from "@tanstack/react-router";
-import { useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import ganesha from "@/assets/ganesha.png";
 import couple from "@/assets/couple.png";
 import families from "@/assets/families.png";
@@ -30,19 +30,24 @@ export const Route = createFileRoute("/")({
 const MAPS = "https://maps.app.goo.gl/1zk6qwgdq5Dsv7226";
 
 function Petals() {
-  const petals = Array.from({ length: 12 });
+  const petals = Array.from({ length: 18 });
   return (
     <div className="pointer-events-none fixed inset-0 overflow-hidden" aria-hidden>
       {petals.map((_, i) => (
         <span
           key={i}
-          className="petal absolute block rounded-full bg-marigold/40"
+          className="petal absolute block rounded-full"
           style={{
-            left: `${(i * 8.3 + 3) % 100}%`,
-            width: `${6 + (i % 3) * 4}px`,
-            height: `${6 + (i % 4) * 3}px`,
-            animationDuration: `${9 + (i % 5) * 3}s`,
-            animationDelay: `${i * 1.1}s`,
+            left: `${(i * 7.7 + 2) % 100}%`,
+            width: `${6 + (i % 4) * 4}px`,
+            height: `${6 + (i % 5) * 3}px`,
+            backgroundColor: i % 3 === 0
+              ? "oklch(0.68 0.18 18 / 0.45)"
+              : i % 3 === 1
+                ? "oklch(0.82 0.19 82 / 0.45)"
+                : "oklch(0.66 0.2 60 / 0.45)",
+            animationDuration: `${8 + (i % 6) * 3}s`,
+            animationDelay: `${i * 0.9}s`,
           }}
         />
       ))}
@@ -50,14 +55,66 @@ function Petals() {
   );
 }
 
+function MusicPlayer() {
+  const [playing, setPlaying] = useState(false);
+  const [progress, setProgress] = useState(0);
+  const intervalRef = useRef<ReturnType<typeof setInterval> | null>(null);
+
+  useEffect(() => {
+    if (playing) {
+      intervalRef.current = setInterval(() => {
+        setProgress((p) => (p >= 100 ? 0 : p + 0.5));
+      }, 100);
+    } else if (intervalRef.current) {
+      clearInterval(intervalRef.current);
+    }
+    return () => {
+      if (intervalRef.current) clearInterval(intervalRef.current);
+    };
+  }, [playing]);
+
+  return (
+    <div className="fixed right-4 top-4 z-50 flex items-center gap-2 rounded-full bg-cream/90 px-3 py-2 ring-glow backdrop-blur-sm">
+      <button
+        type="button"
+        onClick={() => setPlaying((p) => !p)}
+        aria-label={playing ? "Pause music" : "Play music"}
+        className="flex h-9 w-9 items-center justify-center rounded-full bg-marigold-deep text-cream shadow-md transition-transform active:scale-95"
+      >
+        {playing ? (
+          <svg className="h-4 w-4" viewBox="0 0 24 24" fill="currentColor">
+            <rect x="6" y="5" width="4" height="14" rx="1" />
+            <rect x="14" y="5" width="4" height="14" rx="1" />
+          </svg>
+        ) : (
+          <svg className="h-4 w-4" viewBox="0 0 24 24" fill="currentColor">
+            <path d="M8 5v14l11-7L8 5z" />
+          </svg>
+        )}
+      </button>
+      <div className="w-16">
+        <div className="h-1.5 w-full overflow-hidden rounded-full bg-marigold/20">
+          <div
+            className="h-full rounded-full bg-marigold-deep transition-all"
+            style={{ width: `${progress}%` }}
+          />
+        </div>
+      </div>
+      <span className="text-[10px] font-bold uppercase tracking-wider text-ink/70">
+        {playing ? "Playing" : "Music"}
+      </span>
+    </div>
+  );
+}
+
 function Divider() {
   return (
     <div className="my-8 flex items-center justify-center gap-3 text-marigold-deep">
-      <span className="h-px w-12 bg-marigold-deep/40" />
+      <span className="h-px w-12 bg-marigold-deep/50" />
       <span className="text-lg">✿</span>
-      <span className="h-px w-20 bg-marigold-deep/40" />
+      <span className="h-px w-20 bg-marigold-deep/50" />
       <span className="text-lg">✿</span>
-      <span className="h-px w-12 bg-marigold-deep/40" />
+      <span className="h-px w-12 bg-marigold-deep/50" />
     </div>
   );
 }
@@ -65,21 +122,22 @@ function Divider() {
 function Cover({ onOpen }: { onOpen: () => void }) {
   return (
     <div className="relative flex min-h-dvh flex-col items-center justify-center px-6 py-10 text-center">
-      <div className="pointer-events-none absolute inset-6 rounded-[2.5rem] border border-marigold-deep/25" aria-hidden />
-      <div className="pointer-events-none absolute inset-8 rounded-[2rem] border border-dashed border-marigold-deep/20" aria-hidden />
+      <div className="pointer-events-none absolute inset-5 rounded-[2.5rem] border-2 border-marigold/60" aria-hidden />
+      <div className="pointer-events-none absolute inset-8 rounded-[2rem] border-2 border-dashed border-marigold-deep/40" aria-hidden />
+      <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_50%_35%,oklch(0.82_0.19_82/0.25),transparent_60%)]" aria-hidden />
 
-      <p className="font-telugu text-sm tracking-[0.35em] text-marigold-deep">శుభం</p>
+      <p className="font-telugu text-base font-bold tracking-[0.35em] text-marigold-deep">శుభం</p>
       <div className="relative mt-2">
-        <div className="absolute inset-0 glow-pulse rounded-full bg-marigold/30 blur-2xl" aria-hidden />
+        <div className="absolute inset-0 glow-pulse rounded-full bg-marigold/40 blur-2xl" aria-hidden />
         <img
           src={ganesha}
           alt="వినాయకుడి చిత్రం"
           width={1024}
           height={1024}
-          className="relative mx-auto w-48 float-soft"
+          className="relative mx-auto w-52 float-soft drop-shadow-xl"
         />
       </div>
-      <p className="font-telugu mt-1 text-base text-ink/80">॥ శ్రీ గణేశాయ నమః ॥</p>
+      <p className="font-telugu mt-2 text-lg font-semibold text-ink/90">॥ శ్రీ గణేశాయ నమః ॥</p>
 
       <img
         src={couple}
@@ -87,21 +145,22 @@ function Cover({ onOpen }: { onOpen: () => void }) {
         width={1024}
         height={1024}
         loading="lazy"
-        className="mt-4 w-64"
+        className="mt-5 w-72 drop-shadow-lg"
       />
 
-      <h1 className="font-telugu-round mt-2 text-2xl leading-snug text-ink">
+      <h1 className="font-telugu-round mt-3 text-[1.65rem] font-bold leading-snug text-ink text-glow">
         సాయి వంశి <span className="text-rose">❤</span> ఉదయ భాను
       </h1>
-      <p className="font-telugu mt-2 text-sm text-ink/70">నిశ్చితార్థ శుభలేఖ</p>
+      <p className="font-telugu mt-2 text-base font-semibold text-ink/80">నిశ్చితార్థ శుభలేఖ</p>
 
       <button
         onClick={onOpen}
-        className="font-telugu-round mt-7 rounded-full bg-marigold-deep px-8 py-3 text-base text-cream card-shadow transition-transform active:scale-95"
+        className="font-telugu-round relative mt-8 overflow-hidden rounded-full bg-gradient-to-r from-marigold-deep via-ruby to-marigold-deep px-9 py-3.5 text-lg font-bold text-cream card-shadow transition-transform active:scale-95"
       >
-        శుభలేఖ తెరవండి ✦
+        <span className="relative z-10">Tap to Open ✦</span>
+        <span className="pointer-events-none absolute inset-0 shimmer opacity-40" aria-hidden />
       </button>
-      <p className="font-telugu mt-3 text-xs text-ink/50">పైన నొక్కండి</p>
+      <p className="font-telugu mt-3 text-xs font-semibold text-ink/55">శుభలేఖను తెరవడానికి నొక్కండి</p>
     </div>
   );
 }
@@ -116,7 +175,7 @@ function Section({ children, delay = 0 }: { children: React.ReactNode; delay?: n
 
 function Invitation() {
   return (
-    <div className="relative mx-auto max-w-md pb-16 pt-10">
+    <div className="relative mx-auto max-w-md pb-20 pt-14">
       <Section>
         <img
           src={kalash}
@@ -124,12 +183,14 @@ function Invitation() {
           width={1024}
           height={1024}
           loading="lazy"
-          className="mx-auto w-28 float-soft"
+          className="mx-auto w-32 float-soft drop-shadow-lg"
         />
-        <p className="font-telugu mt-3 text-sm tracking-widest text-marigold-deep">
+        <p className="font-telugu mt-3 text-base font-bold tracking-widest text-marigold-deep">
           ॥ శుభమస్తు ॥
         </p>
-        <h2 className="font-telugu-round mt-2 text-xl text-ink">నిశ్చితార్థ ఆహ్వానం</h2>
+        <h2 className="font-telugu-round mt-2 text-[1.4rem] font-bold text-ink text-glow">
+          నిశ్చితార్థ ఆహ్వానం
+        </h2>
       </Section>
 
       <Divider />
@@ -141,14 +202,14 @@ function Invitation() {
           width={1024}
           height={1024}
           loading="lazy"
-          className="mx-auto w-60"
+          className="mx-auto w-64 drop-shadow-lg"
         />
-        <div className="mt-2 rounded-3xl bg-cream/80 px-5 py-6 card-shadow">
-          <p className="font-telugu-round text-2xl leading-tight text-ink">
+        <div className="mt-3 rounded-3xl bg-gradient-to-b from-cream to-cream/70 px-5 py-7 card-shadow">
+          <p className="font-telugu-round text-[1.55rem] font-bold leading-tight text-ink">
             గోలి సాయి వంశి రెడ్డి
           </p>
-          <p className="font-script my-2 text-xl italic text-marigold-deep">weds</p>
-          <p className="font-telugu-round text-2xl leading-tight text-ink">
+          <p className="font-script my-2 text-2xl font-semibold italic text-ruby">weds</p>
+          <p className="font-telugu-round text-[1.55rem] font-bold leading-tight text-ink">
             పాల ఉదయ భాను రెడ్డి
           </p>
         </div>
@@ -163,9 +224,9 @@ function Invitation() {
           width={1024}
           height={1024}
           loading="lazy"
-          className="mx-auto w-64"
+          className="mx-auto w-64 drop-shadow-lg"
         />
-        <p className="font-telugu mt-3 text-[15px] leading-8 text-ink/85">
+        <p className="font-telugu mt-3 text-base font-bold leading-8 text-ink/90">
           గోలి వారి కుటుంబం మరియు పాల వారి కుటుంబం
           <br />
           ఎంతో సంతోషంతో మిమ్మల్ని ఆహ్వానిస్తున్నాము.
@@ -181,19 +242,19 @@ function Invitation() {
       <Divider />
 
       <Section delay={280}>
-        <div className="mx-auto rounded-3xl border border-marigold-deep/30 bg-cream/70 px-6 py-6">
-          <p className="font-telugu text-sm text-marigold-deep">శుభ ముహూర్తం</p>
-          <p className="font-telugu-round mt-2 text-4xl text-ink">21</p>
-          <p className="font-telugu text-lg text-ink">ఆగస్టు 2026</p>
-          <p className="font-telugu mt-1 text-sm text-ink/60">శుక్రవారం</p>
+        <div className="mx-auto rounded-3xl border-2 border-marigold-deep/40 bg-gradient-to-b from-cream to-cream/60 px-6 py-7 card-shadow">
+          <p className="font-telugu text-base font-bold text-ruby">శుభ ముహూర్తం</p>
+          <p className="font-telugu-round mt-2 text-5xl font-extrabold text-ink text-glow">21</p>
+          <p className="font-telugu text-xl font-bold text-ink">ఆగస్టు 2026</p>
+          <p className="font-telugu mt-1 text-sm font-semibold text-ink/65">శుక్రవారం</p>
         </div>
       </Section>
 
       <Divider />
 
       <Section delay={360}>
-        <p className="font-telugu text-sm text-marigold-deep">వేదిక</p>
-        <p className="font-telugu mt-2 text-[15px] leading-8 text-ink/85">
+        <p className="font-telugu text-base font-bold text-ruby">వేదిక</p>
+        <p className="font-telugu mt-2 text-base font-bold leading-8 text-ink/90">
           ఉమా గార్డెన్ దగ్గర,
           <br />
           కొత్తూరు రోడ్, ఎన్టీఆర్ నగర్,
@@ -204,9 +265,10 @@ function Invitation() {
           href={MAPS}
           target="_blank"
           rel="noopener noreferrer"
-          className="font-telugu-round mt-5 inline-block rounded-full bg-marigold-deep px-7 py-3 text-cream card-shadow transition-transform active:scale-95"
+          className="font-telugu-round relative mt-6 inline-flex items-center gap-2 overflow-hidden rounded-full bg-gradient-to-r from-marigold-deep via-ruby to-marigold-deep px-8 py-3.5 text-base font-bold text-cream card-shadow transition-transform active:scale-95"
         >
-          📍 మ్యాప్‌లో చూడండి
+          <span className="relative z-10">📍 Open Maps</span>
+          <span className="pointer-events-none absolute inset-0 shimmer opacity-30" aria-hidden />
         </a>
       </Section>
 
@@ -219,20 +281,20 @@ function Invitation() {
           width={1024}
           height={1024}
           loading="lazy"
-          className="mx-auto w-56 float-soft"
+          className="mx-auto w-60 float-soft drop-shadow-lg"
         />
-        <p className="font-telugu mt-2 text-[15px] leading-8 text-ink/85">
+        <p className="font-telugu mt-2 text-base font-bold leading-8 text-ink/90">
           మీ రాక మా వేడుకకు వన్నె తెస్తుంది.
           <br />
           మీ ఆశీస్సులే మాకు అసలైన బహుమతి. 🌼
         </p>
-        <p className="font-telugu mt-5 text-sm text-marigold-deep">
+        <p className="font-telugu mt-5 text-sm font-bold text-marigold-deep">
           ఇట్లు, మీ ఆత్మీయులు
         </p>
-        <p className="font-telugu-round mt-1 text-lg text-ink">
+        <p className="font-telugu-round mt-1 text-lg font-bold text-ink">
           గోలి &amp; పాల కుటుంబ సభ్యులు
         </p>
-        <p className="font-telugu mt-3 text-xs tracking-widest text-ink/50">
+        <p className="font-telugu mt-3 text-xs font-bold tracking-widest text-ink/55">
           ఇరు కుటుంబాల శుభాకాంక్షలతో
         </p>
       </Section>
@@ -244,8 +306,9 @@ function Index() {
   const [open, setOpen] = useState(false);
 
   return (
-    <main className="relative min-h-dvh overflow-hidden bg-[radial-gradient(circle_at_top,var(--color-cream),oklch(0.99_0.01_95))] text-ink">
+    <main className="relative min-h-dvh overflow-hidden bg-[radial-gradient(circle_at_top,oklch(0.99_0.03_90),oklch(0.98_0.02_85))] text-ink">
       <Petals />
+      <MusicPlayer />
       <div className="relative">{open ? <Invitation /> : <Cover onOpen={() => setOpen(true)} />}</div>
     </main>
   );
