@@ -4,6 +4,45 @@
 
 @custom-variant dark (&:is(.dark *));
 
+@theme {
+  --font-telugu: "Noto Serif Telugu", serif;
+  --font-telugu-round: "Baloo Tammudu 2", cursive;
+  --font-script: "Cormorant Garamond", serif;
+  --color-marigold: oklch(0.79 0.15 84);
+  --color-marigold-deep: oklch(0.68 0.16 68);
+  --color-cream: oklch(0.975 0.02 92);
+  --color-ink: oklch(0.32 0.03 60);
+  --color-leaf: oklch(0.52 0.08 150);
+  --color-rose: oklch(0.72 0.12 20);
+}
+
+@utility card-shadow {
+  box-shadow: 0 18px 45px -20px color-mix(in oklab, var(--color-marigold-deep) 55%, transparent);
+}
+
+@keyframes float-soft {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-10px); }
+}
+@keyframes petal-fall {
+  0% { transform: translateY(-10vh) rotate(0deg); opacity: 0; }
+  10% { opacity: 1; }
+  100% { transform: translateY(110vh) rotate(360deg); opacity: 0; }
+}
+@keyframes rise-in {
+  from { opacity: 0; transform: translateY(24px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+@keyframes glow-pulse {
+  0%, 100% { opacity: 0.35; transform: scale(1); }
+  50% { opacity: 0.7; transform: scale(1.08); }
+}
+
+@utility float-soft { animation: float-soft 5s ease-in-out infinite; }
+@utility rise-in { animation: rise-in 0.9s cubic-bezier(0.22, 1, 0.36, 1) both; }
+@utility glow-pulse { animation: glow-pulse 3s ease-in-out infinite; }
+@utility petal { animation: petal-fall linear infinite; }
+
 /*
  * Design system definition.
  *
