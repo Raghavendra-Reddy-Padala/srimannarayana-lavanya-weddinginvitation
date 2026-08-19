@@ -1,5 +1,5 @@
 import { createFileRoute } from "@tanstack/react-router";
-import { useState } from "react";
+import { useState, useEffect, useRef } from "react";
 import ganesha from "@/assets/ganesha.png";
 import couple from "@/assets/couple.png";
 import families from "@/assets/families.png";
@@ -55,8 +55,50 @@ function Petals() {
   );
 }
 
-function MusicPlayer() {
-  const [playing, setPlaying] = useState(false);
+function MusicPlayer({ playing, setPlaying }: { playing: boolean; setPlaying: React.Dispatch<React.SetStateAction<boolean>> }) {
+  const audioRef = useRef<HTMLAudioElement | null>(null);
+
+  useEffect(() => {
+    const audio = new Audio("/music/invitation.mp3");
+    audio.loop = true;
+    audio.currentTime = 27;
+    audioRef.current = audio;
+
+    return () => {
+      audio.pause();
+      audioRef.current = null;
+    };
+  }, []);
+
+  useEffect(() => {
+    if (!audioRef.current) return;
+    
+    if (playing) {
+      audioRef.current.play().catch((err) => {
+        console.error("Audio playback blocked by browser. Waiting for interaction...");
+        // Do not set playing to false here so it tries to play again on interaction
+      });
+    } else {
+      audioRef.current.pause();
+    }
+  }, [playing]);
+
+  // Attempt to resume playback on first interaction if blocked
+  useEffect(() => {
+    const handleInteraction = () => {
+      if (playing && audioRef.current && audioRef.current.paused) {
+        audioRef.current.play().catch(() => {});
+      }
+    };
+
+    document.addEventListener("click", handleInteraction);
+    document.addEventListener("touchstart", handleInteraction);
+
+    return () => {
+      document.removeEventListener("click", handleInteraction);
+      document.removeEventListener("touchstart", handleInteraction);
+    };
+  }, [playing]);
 
   return (
     <button
@@ -276,12 +318,24 @@ function Invitation() {
 
 function Index() {
   const [open, setOpen] = useState(false);
+  const [playing, setPlaying] = useState(true);
 
   return (
     <main className="relative min-h-dvh overflow-hidden bg-[radial-gradient(circle_at_top,oklch(0.99_0.03_90),oklch(0.98_0.02_85))] text-ink">
       <Petals />
-      <MusicPlayer />
-      <div className="relative">{open ? <Invitation /> : <Cover onOpen={() => setOpen(true)} />}</div>
+      <MusicPlayer playing={playing} setPlaying={setPlaying} />
+      <div className="relative">
+        {open ? (
+          <Invitation />
+        ) : (
+          <Cover
+            onOpen={() => {
+              setOpen(true);
+              setPlaying(true);
+            }}
+          />
+        )}
+      </div>
     </main>
   );
 }
