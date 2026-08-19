@@ -1,5 +1,5 @@
 import { createFileRoute } from "@tanstack/react-router";
-import { useEffect, useRef, useState } from "react";
+import { useState } from "react";
 import ganesha from "@/assets/ganesha.png";
 import couple from "@/assets/couple.png";
 import families from "@/assets/families.png";
