@@ -57,53 +57,25 @@ function Petals() {
 
 function MusicPlayer() {
   const [playing, setPlaying] = useState(false);
-  const [progress, setProgress] = useState(0);
-  const intervalRef = useRef<ReturnType<typeof setInterval> | null>(null);
-
-  useEffect(() => {
-    if (playing) {
-      intervalRef.current = setInterval(() => {
-        setProgress((p) => (p >= 100 ? 0 : p + 0.5));
-      }, 100);
-    } else if (intervalRef.current) {
-      clearInterval(intervalRef.current);
-    }
-    return () => {
-      if (intervalRef.current) clearInterval(intervalRef.current);
-    };
-  }, [playing]);
 
   return (
-    <div className="fixed right-4 top-4 z-50 flex items-center gap-2 rounded-full bg-cream/90 px-3 py-2 ring-glow backdrop-blur-sm">
-      <button
-        type="button"
-        onClick={() => setPlaying((p) => !p)}
-        aria-label={playing ? "Pause music" : "Play music"}
-        className="flex h-9 w-9 items-center justify-center rounded-full bg-marigold-deep text-cream shadow-md transition-transform active:scale-95"
-      >
-        {playing ? (
-          <svg className="h-4 w-4" viewBox="0 0 24 24" fill="currentColor">
-            <rect x="6" y="5" width="4" height="14" rx="1" />
-            <rect x="14" y="5" width="4" height="14" rx="1" />
-          </svg>
-        ) : (
-          <svg className="h-4 w-4" viewBox="0 0 24 24" fill="currentColor">
-            <path d="M8 5v14l11-7L8 5z" />
-          </svg>
-        )}
-      </button>
-      <div className="w-16">
-        <div className="h-1.5 w-full overflow-hidden rounded-full bg-marigold/20">
-          <div
-            className="h-full rounded-full bg-marigold-deep transition-all"
-            style={{ width: `${progress}%` }}
-          />
-        </div>
-      </div>
-      <span className="text-[10px] font-bold uppercase tracking-wider text-ink/70">
-        {playing ? "Playing" : "Music"}
-      </span>
-    </div>
+    <button
+      type="button"
+      onClick={() => setPlaying((p) => !p)}
+      aria-label={playing ? "Pause music" : "Play music"}
+      className="fixed right-4 top-4 z-50 flex h-10 w-10 items-center justify-center rounded-full bg-marigold-deep text-cream shadow-lg ring-2 ring-cream/80 transition-transform active:scale-95"
+    >
+      {playing ? (
+        <svg className="h-4 w-4" viewBox="0 0 24 24" fill="currentColor">
+          <rect x="6" y="5" width="4" height="14" rx="1" />
+          <rect x="14" y="5" width="4" height="14" rx="1" />
+        </svg>
+      ) : (
+        <svg className="h-4 w-4" viewBox="0 0 24 24" fill="currentColor">
+          <path d="M8 5v14l11-7L8 5z" />
+        </svg>
+      )}
+    </button>
   );
 }
 
