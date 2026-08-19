@@ -65,8 +65,8 @@ function Divider() {
 function Cover({ onOpen }: { onOpen: () => void }) {
   return (
     <div className="relative flex min-h-dvh flex-col items-center justify-center px-6 py-10 text-center">
-      <div className="absolute inset-6 rounded-[2.5rem] border border-marigold-deep/25" aria-hidden />
-      <div className="absolute inset-8 rounded-[2rem] border border-dashed border-marigold-deep/20" aria-hidden />
+      <div className="pointer-events-none absolute inset-6 rounded-[2.5rem] border border-marigold-deep/25" aria-hidden />
+      <div className="pointer-events-none absolute inset-8 rounded-[2rem] border border-dashed border-marigold-deep/20" aria-hidden />
 
       <p className="font-telugu text-sm tracking-[0.35em] text-marigold-deep">శుభం</p>
       <div className="relative mt-2">
