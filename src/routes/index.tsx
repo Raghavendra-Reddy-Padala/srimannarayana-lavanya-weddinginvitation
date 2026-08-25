@@ -27,7 +27,7 @@ export const Route = createFileRoute("/")({
   component: Index,
 });
 
-const MAPS = "https://share.google/VWK5WA0l4RVLwrsCd";
+const MAPS = "https://share.google/heNLlKQMeDAwGXcZe";
 
 function Petals() {
   const petals = Array.from({ length: 24 });
@@ -253,7 +253,7 @@ function Invitation() {
           <p className="font-telugu text-base font-bold text-ruby">శుభ ముహూర్తం</p>
           <p className="font-telugu-round mt-2 text-5xl font-extrabold text-ink text-glow">
             {/* DATE — please update as needed */}
-            21
+            30
           </p>
           <p className="font-telugu text-xl font-bold text-ink">ఆగస్టు 2026</p>
           <p className="font-telugu mt-1 text-sm font-semibold text-ink/65">శుక్రవారం</p>
@@ -272,11 +272,13 @@ function Invitation() {
       <Section delay={360}>
         <p className="font-telugu text-base font-bold text-ruby">వేదిక</p>
         <p className="font-telugu mt-2 text-base font-bold leading-8 text-ink/90">
-          ఉమా గార్డెన్ దగ్గర,
+          వెటర్నరీ కాలనీ 2వ లెఫ్ట్,
           <br />
-          కొత్తూరు రోడ్, ఎన్టీఆర్ నగర్,
+          శ్రీ మాలినేని నాగేశ్వరరావు లైబ్రరీ హాల్,
           <br />
-          సత్తుపల్లి, తెలంగాణ – 507303
+          NTR & వెటర్నరీ డెవలప్‌మెంట్ అసోసియేషన్,
+          <br />
+          విజయవాడ – 8
         </p>
         <a
           href={MAPS}
@@ -287,6 +289,37 @@ function Invitation() {
           <span className="relative z-10">📍 Open Maps</span>
           <span className="pointer-events-none absolute inset-0 shimmer opacity-30" aria-hidden />
         </a>
+      </Section>
+
+      <Divider />
+
+      <Section delay={420}>
+        <div className="mx-auto rounded-3xl border-2 border-marigold-deep/40 bg-gradient-to-b from-cream to-cream/60 px-6 py-7 card-shadow">
+          <p className="font-telugu text-base font-bold text-ruby">రిసెప్షన్</p>
+          <p className="font-telugu-round mt-2 text-5xl font-extrabold text-ink text-glow">1</p>
+          <p className="font-telugu text-xl font-bold text-ink">సెప్టెంబర్ 2026</p>
+          <p className="font-telugu mt-1 text-sm font-semibold text-ink/65">మంగళవారం</p>
+          <div className="mt-4 border-t border-marigold-deep/20 pt-4">
+            <p className="font-telugu text-sm font-bold leading-7 text-ink/90">
+              వెటర్నరీ కాలనీ 2వ లెఫ్ట్,
+              <br />
+              శ్రీ మాలినేని నాగేశ్వరరావు లైబ్రరీ హాల్,
+              <br />
+              NTR & వెటర్నరీ డెవలప్‌మెంట్ అసోసియేషన్,
+              <br />
+              విజయవాడ – 8
+            </p>
+          </div>
+          <a
+            href={MAPS}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="font-telugu-round relative mt-5 inline-flex items-center gap-2 overflow-hidden rounded-full bg-gradient-to-r from-marigold-deep via-ruby to-marigold-deep px-8 py-3 text-sm font-bold text-cream card-shadow transition-transform active:scale-95"
+          >
+            <span className="relative z-10">📍 Open Maps</span>
+            <span className="pointer-events-none absolute inset-0 shimmer opacity-30" aria-hidden />
+          </a>
+        </div>
       </Section>
 
       <Divider />
