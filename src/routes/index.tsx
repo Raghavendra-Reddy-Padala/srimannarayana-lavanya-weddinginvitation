@@ -9,16 +9,16 @@ import birds from "@/assets/birds.png";
 export const Route = createFileRoute("/")({
   head: () => ({
     meta: [
-      { title: "సాయి వంశి ❤ ఉదయ భాను — నిశ్చితార్థ ఆహ్వానం" },
+      { title: "శ్రీమన్నారాయణ ❤ లావణ్య — వివాహ ఆహ్వానం" },
       {
         name: "description",
         content:
-          "గోలి సాయి వంశి రెడ్డి మరియు పాల ఉదయ భాను రెడ్డి నిశ్చితార్థ వేడుక — 21 ఆగస్టు 2026, సత్తుపల్లి. మీ ఆశీస్సులు కోరుతూ.",
+          "కనుగంటి శ్రీమన్నారాయణ మరియు గుడుపురాజు లావణ్య వివాహ వేడుక — మీ ఆశీస్సులు కోరుతూ.",
       },
-      { property: "og:title", content: "సాయి వంశి ❤ ఉదయ భాను — నిశ్చితార్థ ఆహ్వానం" },
+      { property: "og:title", content: "శ్రీమన్నారాయణ ❤ లావణ్య — వివాహ ఆహ్వానం" },
       {
         property: "og:description",
-        content: "21 ఆగస్టు 2026 • సత్తుపల్లి — మా ఇంటి శుభకార్యానికి మీరు రావాలి, ఆశీర్వదించాలి.",
+        content: "కనుగంటి & గుడుపురాజు కుటుంబాల శుభవివాహ వేడుకకు మీరు విచ్చేసి ఆశీర్వదించాలని మనవి.",
       },
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary_large_image" },
@@ -27,10 +27,10 @@ export const Route = createFileRoute("/")({
   component: Index,
 });
 
-const MAPS = "https://maps.app.goo.gl/1zk6qwgdq5Dsv7226";
+const MAPS = "https://share.google/VWK5WA0l4RVLwrsCd";
 
 function Petals() {
-  const petals = Array.from({ length: 18 });
+  const petals = Array.from({ length: 24 });
   return (
     <div className="pointer-events-none fixed inset-0 overflow-hidden" aria-hidden>
       {petals.map((_, i) => (
@@ -38,16 +38,18 @@ function Petals() {
           key={i}
           className="petal absolute block rounded-full"
           style={{
-            left: `${(i * 7.7 + 2) % 100}%`,
-            width: `${6 + (i % 4) * 4}px`,
-            height: `${6 + (i % 5) * 3}px`,
-            backgroundColor: i % 3 === 0
-              ? "oklch(0.68 0.18 18 / 0.45)"
-              : i % 3 === 1
-                ? "oklch(0.82 0.19 82 / 0.45)"
-                : "oklch(0.66 0.2 60 / 0.45)",
-            animationDuration: `${8 + (i % 6) * 3}s`,
-            animationDelay: `${i * 0.9}s`,
+            left: `${(i * 5.3 + 2) % 100}%`,
+            width: `${6 + (i % 5) * 3}px`,
+            height: `${5 + (i % 4) * 4}px`,
+            backgroundColor: i % 4 === 0
+              ? "oklch(0.68 0.18 18 / 0.5)"
+              : i % 4 === 1
+                ? "oklch(0.82 0.19 82 / 0.5)"
+                : i % 4 === 2
+                  ? "oklch(0.78 0.17 78 / 0.45)"
+                  : "oklch(0.66 0.2 60 / 0.45)",
+            animationDuration: `${7 + (i % 7) * 2.5}s`,
+            animationDelay: `${i * 0.7}s`,
           }}
         />
       ))}
@@ -72,22 +74,20 @@ function MusicPlayer({ playing, setPlaying }: { playing: boolean; setPlaying: Re
 
   useEffect(() => {
     if (!audioRef.current) return;
-    
+
     if (playing) {
       audioRef.current.play().catch((err) => {
         console.error("Audio playback blocked by browser. Waiting for interaction...");
-        // Do not set playing to false here so it tries to play again on interaction
       });
     } else {
       audioRef.current.pause();
     }
   }, [playing]);
 
-  // Attempt to resume playback on first interaction if blocked
   useEffect(() => {
     const handleInteraction = () => {
       if (playing && audioRef.current && audioRef.current.paused) {
-        audioRef.current.play().catch(() => {});
+        audioRef.current.play().catch(() => { });
       }
     };
 
@@ -125,9 +125,9 @@ function Divider() {
   return (
     <div className="my-8 flex items-center justify-center gap-3 text-marigold-deep">
       <span className="h-px w-12 bg-marigold-deep/50" />
-      <span className="text-lg">✿</span>
+      <span className="text-lg">🌸</span>
       <span className="h-px w-20 bg-marigold-deep/50" />
-      <span className="text-lg">✿</span>
+      <span className="text-lg">🌸</span>
       <span className="h-px w-12 bg-marigold-deep/50" />
     </div>
   );
@@ -140,7 +140,7 @@ function Cover({ onOpen }: { onOpen: () => void }) {
       <div className="pointer-events-none absolute inset-8 rounded-[2rem] border-2 border-dashed border-marigold-deep/40" aria-hidden />
       <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_50%_35%,oklch(0.82_0.19_82/0.25),transparent_60%)]" aria-hidden />
 
-      <p className="font-telugu text-base font-bold tracking-[0.35em] text-marigold-deep">శుభం</p>
+      <p className="font-telugu text-base font-bold tracking-[0.35em] text-marigold-deep">శుభం భూయాత్</p>
       <div className="relative mt-2">
         <div className="absolute inset-0 glow-pulse rounded-full bg-marigold/40 blur-2xl" aria-hidden />
         <img
@@ -155,7 +155,7 @@ function Cover({ onOpen }: { onOpen: () => void }) {
 
       <img
         src={couple}
-        alt="ఉంగరం మార్చుకుంటున్న జంట చిత్రం"
+        alt="వివాహ జంట చిత్రం"
         width={1024}
         height={1024}
         loading="lazy"
@@ -163,9 +163,9 @@ function Cover({ onOpen }: { onOpen: () => void }) {
       />
 
       <h1 className="font-telugu-round mt-3 text-[1.65rem] font-bold leading-snug text-ink text-glow">
-        సాయి వంశి <span className="text-rose">❤</span> ఉదయ భాను
+        శ్రీమన్నారాయణ <span className="text-rose">❤</span> లావణ్య
       </h1>
-      <p className="font-telugu mt-2 text-base font-semibold text-ink/80">నిశ్చితార్థ శుభలేఖ</p>
+      <p className="font-telugu mt-2 text-base font-semibold text-ink/80">వివాహ శుభలేఖ</p>
 
       <button
         onClick={onOpen}
@@ -191,19 +191,12 @@ function Invitation() {
   return (
     <div className="relative mx-auto max-w-md pb-20 pt-14">
       <Section>
-        <img
-          src={kalash}
-          alt="కలశం చిత్రం"
-          width={1024}
-          height={1024}
-          loading="lazy"
-          className="mx-auto w-32 float-soft drop-shadow-lg"
-        />
+
         <p className="font-telugu mt-3 text-base font-bold tracking-widest text-marigold-deep">
-          ॥ శుభమస్తు ॥
+          ॥ శుభవివాహం ॥
         </p>
         <h2 className="font-telugu-round mt-2 text-[1.4rem] font-bold text-ink text-glow">
-          నిశ్చితార్థ ఆహ్వానం
+          వివాహ ఆహ్వానం
         </h2>
       </Section>
 
@@ -212,7 +205,7 @@ function Invitation() {
       <Section delay={120}>
         <img
           src={couple}
-          alt="జంట చిత్రం"
+          alt="వివాహ జంట చిత్రం"
           width={1024}
           height={1024}
           loading="lazy"
@@ -220,11 +213,11 @@ function Invitation() {
         />
         <div className="mt-3 rounded-3xl bg-gradient-to-b from-cream to-cream/70 px-5 py-7 card-shadow">
           <p className="font-telugu-round text-[1.55rem] font-bold leading-tight text-ink">
-            గోలి సాయి వంశి రెడ్డి
+            కనుగంటి శ్రీమన్నారాయణ
           </p>
-          <p className="font-script my-2 text-2xl font-semibold italic text-ruby">weds</p>
+          <p className="font-script my-3 text-2xl font-semibold italic text-ruby">weds</p>
           <p className="font-telugu-round text-[1.55rem] font-bold leading-tight text-ink">
-            పాల ఉదయ భాను రెడ్డి
+            గుడుపురాజు లావణ్య
           </p>
         </div>
       </Section>
@@ -241,15 +234,15 @@ function Invitation() {
           className="mx-auto w-64 drop-shadow-lg"
         />
         <p className="font-telugu mt-3 text-base font-bold leading-8 text-ink/90">
-          గోలి వారి కుటుంబం మరియు పాల వారి కుటుంబం
+          కనుగంటి వారి కుటుంబం మరియు గుడుపురాజు వారి కుటుంబం
           <br />
-          ఎంతో సంతోషంతో మిమ్మల్ని ఆహ్వానిస్తున్నాము.
+          ఎంతో ఆనందంతో మిమ్మల్ని ఆహ్వానిస్తున్నాము.
           <br />
-          మా ఇంటి ముద్దుబిడ్డల నిశ్చితార్థ వేడుకకు
+          మా ముద్దుల పిల్లల పెళ్ళి వేడుకకు
           <br />
-          మీరంతా తప్పక విచ్చేసి, నూతన జంటను
+          మీరంతా తప్పకుండా విచ్చేసి, నూతన వధూవరులను
           <br />
-          మనసారా ఆశీర్వదించాలని కోరుతున్నాము.
+          మనసారా ఆశీర్వదించాలని వేడుకుంటున్నాము.
         </p>
       </Section>
 
@@ -258,9 +251,19 @@ function Invitation() {
       <Section delay={280}>
         <div className="mx-auto rounded-3xl border-2 border-marigold-deep/40 bg-gradient-to-b from-cream to-cream/60 px-6 py-7 card-shadow">
           <p className="font-telugu text-base font-bold text-ruby">శుభ ముహూర్తం</p>
-          <p className="font-telugu-round mt-2 text-5xl font-extrabold text-ink text-glow">21</p>
+          <p className="font-telugu-round mt-2 text-5xl font-extrabold text-ink text-glow">
+            {/* DATE — please update as needed */}
+            21
+          </p>
           <p className="font-telugu text-xl font-bold text-ink">ఆగస్టు 2026</p>
           <p className="font-telugu mt-1 text-sm font-semibold text-ink/65">శుక్రవారం</p>
+          <div className="mt-4 flex items-center justify-center gap-2 text-marigold-deep">
+            <span className="text-lg">🪔</span>
+            <p className="font-telugu text-sm font-bold text-ink/80">
+              సప్తపదులు • మంగళసూత్ర ధారణ • జయమాల
+            </p>
+            <span className="text-lg">🪔</span>
+          </div>
         </div>
       </Section>
 
@@ -298,18 +301,18 @@ function Invitation() {
           className="mx-auto w-60 float-soft drop-shadow-lg"
         />
         <p className="font-telugu mt-2 text-base font-bold leading-8 text-ink/90">
-          మీ రాక మా వేడుకకు వన్నె తెస్తుంది.
+          మీ రాక మా వివాహ వేడుకకు వన్నె తెస్తుంది.
           <br />
-          మీ ఆశీస్సులే మాకు అసలైన బహుమతి. 🌼
+          మీ ఆశీస్సులే మాకు అమూల్యమైన బహుమతి. 🌺
         </p>
         <p className="font-telugu mt-5 text-sm font-bold text-marigold-deep">
           ఇట్లు, మీ ఆత్మీయులు
         </p>
         <p className="font-telugu-round mt-1 text-lg font-bold text-ink">
-          గోలి &amp; పాల కుటుంబ సభ్యులు
+          కనుగంటి &amp; గుడుపురాజు కుటుంబ సభ్యులు
         </p>
         <p className="font-telugu mt-3 text-xs font-bold tracking-widest text-ink/55">
-          ఇరు కుటుంబాల శుభాకాంక్షలతో
+          ఇరు కుటుంబాల వివాహ శుభాకాంక్షలతో
         </p>
       </Section>
     </div>

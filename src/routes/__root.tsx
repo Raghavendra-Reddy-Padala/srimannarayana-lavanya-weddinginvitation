@@ -77,14 +77,14 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
     meta: [
       { charSet: "utf-8" },
       { name: "viewport", content: "width=device-width, initial-scale=1" },
-      { title: "Lovable App" },
-      { name: "description", content: "Lovable Generated Project" },
-      { name: "author", content: "Lovable" },
-      { property: "og:title", content: "Lovable App" },
-      { property: "og:description", content: "Lovable Generated Project" },
+      { title: "శ్రీమన్నారాయణ ❤ లావణ్య — వివాహ ఆహ్వానం" },
+      { name: "description", content: "కనుగంటి శ్రీమన్నారాయణ మరియు గుడుపురాజు లావణ్య వివాహ వేడుక ఆహ్వానం" },
+      { name: "author", content: "Kanuganti & Gudupuraju Family" },
+      { property: "og:title", content: "శ్రీమన్నారాయణ ❤ లావణ్య — వివాహ ఆహ్వానం" },
+      { property: "og:description", content: "కనుగంటి & గుడుపురాజు కుటుంబాల శుభవివాహ వేడుకకు మీరు విచ్చేసి ఆశీర్వదించాలని మనవి." },
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary_large_image" },
-      { name: "twitter:site", content: "@Lovable" },
+      { name: "twitter:site", content: "@WeddingInvitation" },
     ],
     links: [
       {
