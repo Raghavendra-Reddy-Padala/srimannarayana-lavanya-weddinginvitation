@@ -9,16 +9,16 @@ import birds from "@/assets/birds.png";
 export const Route = createFileRoute("/")({
   head: () => ({
     meta: [
-      { title: "శ్రీమన్నారాయణ ❤ లావణ్య — వివాహ ఆహ్వానం" },
+      { title: "శివనారాయణ ❤ దుర్గ భవాని — వివాహ ఆహ్వానం" },
       {
         name: "description",
         content:
-          "కనుగంటి శ్రీమన్నారాయణ మరియు గుడుపురాజు లావణ్య వివాహ వేడుక — మీ ఆశీస్సులు కోరుతూ.",
+          "కనుగంటి శివనారాయణ మరియు దుర్గ భవాని వివాహ వేడుక — మీ ఆశీస్సులు కోరుతూ.",
       },
-      { property: "og:title", content: "శ్రీమన్నారాయణ ❤ లావణ్య — వివాహ ఆహ్వానం" },
+      { property: "og:title", content: "శివనారాయణ ❤ దుర్గ భవాని — వివాహ ఆహ్వానం" },
       {
         property: "og:description",
-        content: "కనుగంటి & గుడుపురాజు కుటుంబాల శుభవివాహ వేడుకకు మీరు విచ్చేసి ఆశీర్వదించాలని మనవి.",
+        content: "కనుగంటి & మహారాజు కుటుంబాల శుభవివాహ వేడుకకు మీరు విచ్చేసి ఆశీర్వదించాలని మనవి.",
       },
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary_large_image" },
@@ -163,7 +163,7 @@ function Cover({ onOpen }: { onOpen: () => void }) {
       />
 
       <h1 className="font-telugu-round mt-3 text-[1.65rem] font-bold leading-snug text-ink text-glow">
-        శ్రీమన్నారాయణ <span className="text-rose">❤</span> లావణ్య
+        శివనారాయణ <span className="text-rose">❤</span> దుర్గ భవాని
       </h1>
       <p className="font-telugu mt-2 text-base font-semibold text-ink/80">వివాహ శుభలేఖ</p>
 
@@ -213,11 +213,11 @@ function Invitation() {
         />
         <div className="mt-3 rounded-3xl bg-gradient-to-b from-cream to-cream/70 px-5 py-7 card-shadow">
           <p className="font-telugu-round text-[1.55rem] font-bold leading-tight text-ink">
-            కనుగంటి శ్రీమన్నారాయణ
+            కనుగంటి శివనారాయణ
           </p>
           <p className="font-script my-3 text-2xl font-semibold italic text-ruby">weds</p>
           <p className="font-telugu-round text-[1.55rem] font-bold leading-tight text-ink">
-            గుడుపురాజు లావణ్య
+            దుర్గ భవాని
           </p>
         </div>
       </Section>
@@ -234,7 +234,7 @@ function Invitation() {
           className="mx-auto w-64 drop-shadow-lg"
         />
         <p className="font-telugu mt-3 text-base font-bold leading-8 text-ink/90">
-          కనుగంటి వారి కుటుంబం మరియు గుడుపురాజు వారి కుటుంబం
+          కనుగంటి వారి కుటుంబం మరియు మహారాజు వారి కుటుంబం
           <br />
           ఎంతో ఆనందంతో మిమ్మల్ని ఆహ్వానిస్తున్నాము.
           <br />
@@ -342,7 +342,7 @@ function Invitation() {
           ఇట్లు, మీ ఆత్మీయులు
         </p>
         <p className="font-telugu-round mt-1 text-lg font-bold text-ink">
-          కనుగంటి &amp; గుడుపురాజు కుటుంబ సభ్యులు
+          కనుగంటి &amp; మహారాజు కుటుంబ సభ్యులు
         </p>
         <p className="font-telugu mt-3 text-xs font-bold tracking-widest text-ink/55">
           ఇరు కుటుంబాల వివాహ శుభాకాంక్షలతో
